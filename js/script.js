@@ -14,7 +14,6 @@ const discountJunior = 20; //is a percentage discount for below 18 y
 const discountSenior = 40; //is a percentage discount for over 65 y
 let finalPrice; //is the final price, using fixed to cut decimal num
 let discountedPrice;
-
 //user input
 let kmForTrip, userAge; // km for the travel, age of the user input
 console.clear();
@@ -34,15 +33,22 @@ finalPrice = parseInt(priceTicketKm * kmForTrip); //final price before discount
 console.log(finalPrice);
 
 if(userAge < 18){
-    discountedPrice = (finalPrice * discountJunior) / 100; 
-    console.log(discountedPrice + " discounted amount"); //debugging
-    finalPrice -= discountedPrice;
+    CalculateDiscountPrice(discountJunior);
     console.log(finalPrice + " final price"); //debugging
 }
-// else if(){
+else if(userAge > 65){
+    CalculateDiscountPrice(discountSenior);
+    console.log(finalPrice + " final price"); //debugging
+}
 
-// }else{
+if(userAge < 18 || userAge > 65){
+    console.log(`The final cost is: ${finalPrice}` )
 
-// }
+}
 
-// console.log(``)
+
+function CalculateDiscountPrice(age){
+    discountedPrice = (finalPrice * age) / 100; //calculate discount amount based on age user
+    console.log(discountedPrice + " discounted amount"); //debugging
+    finalPrice -= discountedPrice.toFixed(2); // cut decimal number
+}
