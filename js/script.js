@@ -19,15 +19,37 @@ let finalPrice; //is the final price, using fixed to cut decimal num
 let discountedPrice;
 //user input
 let kmForTrip, userAge; // km for the travel, age of the user input
+let isUserInputWrong = 0;
 console.clear();
 
 //asking user age and km
 do {
-    kmForTrip = parseInt(prompt("Hi, insert your travel km:"));
+    if (isUserInputWrong == 0) {
+        kmForTrip = parseInt(prompt("Hi, insert your travel km:"));
+    }
+    else {
+        kmForTrip = parseInt(prompt("Invalid characters, please insert numbers:"));
+    }
+    //break from the do while and continue
+    if (!isNaN(kmForTrip)) {
+        isUserInputWrong = 0;
+        break; // Esce dal ciclo se l'input è un numero
+    }
+    isUserInputWrong = 1;
 } while (isNaN(kmForTrip)) // i make sure user can only input num
-
+// isUserInputWrong=0;
 do {
-    userAge = parseInt(prompt("Hi, insert your current age:"));
+    if (isUserInputWrong == 0) {
+        userAge = parseInt(prompt("Hi, insert your age:"));
+    }
+    else {
+        userAge = parseInt(prompt("Invalid characters, please insert numbers:"));
+    }
+    if (!isNaN(userAge)) {
+        isUserInputWrong = 0;
+        break; // Esce dal ciclo se l'input è un numero
+    }
+    isUserInputWrong = 1;
 } while (isNaN(userAge)) // i make sure user can only input num
 
 //check how much does it cost
