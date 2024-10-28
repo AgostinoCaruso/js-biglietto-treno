@@ -19,7 +19,15 @@ let kmForTrip, userAge; // km for the travel, age of the user input
 console.clear();
 //asking user age and km
 do{
-    kmForTrip = parseInt(prompt("Hi, insert your travel km"));
+    kmForTrip = parseInt(prompt("Hi, insert your travel km:"));
 }while(isNaN(kmForTrip)) // i make sure user can only input num
+console.log(kmForTrip); // debugging
 
-console.log(kmForTrip);
+do{
+    userAge = parseInt(prompt("Hi, insert your current age:"));
+}while(isNaN(userAge)) // i make sure user can only input num
+console.log(userAge); //debugging
+
+//check how much does it cost
+finalPrice = priceTicketKm * kmForTrip; //final price before discount
+console.log(finalPrice);
