@@ -8,7 +8,6 @@ Sulla base di queste informazioni dovrà calcolare il prezzo totale del viaggio,
 (con massimo due decimali, per indicare centesimi sul prezzo). Questo richiederà un minimo di ricerca.
 */
 
-
 "use strict"; // to check for typo error
 
 
@@ -23,29 +22,32 @@ let kmForTrip, userAge; // km for the travel, age of the user input
 console.clear();
 
 //asking user age and km
-AskingUserInput(kmForTrip, userAge);
-console.log(kmForTrip);
+do {
+    kmForTrip = parseInt(prompt("Hi, insert your travel km:"));
+} while (isNaN(kmForTrip)) // i make sure user can only input num
+
+do {
+    userAge = parseInt(prompt("Hi, insert your current age:"));
+} while (isNaN(userAge)) // i make sure user can only input num
+
 //check how much does it cost
 finalPrice = parseInt(priceTicketKm * kmForTrip); //final price before discount
 
+//if statement
 if (userAge < 18) {
     CalculateDiscountPrice(discountJunior);
 }
-else if (userAge > 65) {
+else if (userAge >= 65) {
     CalculateDiscountPrice(discountSenior);
+} else {
+    console.log(`The final cost is: ${finalPrice}€, unfortunatelly at your age of ${userAge} you cannot access to a discount price!\n
+Your data for this travel is: age:${userAge}, km: ${kmForTrip}, final price is: ${finalPrice}€`);
 }
 
-function AskingUserInput(userInput_1,userInput_2 ){
-    do {
-        userInput_1 = parseInt(prompt("Hi, insert your travel km:"));
-    } while (isNaN(userInput_1)) // i make sure user can only input num
-    // do {
-    //     userInput_2 = parseInt(prompt("Hi, insert your current age:"));
-    // } while (isNaN(userInput_2)) // i make sure user can only input num
-}
-
+//functions
 function CalculateDiscountPrice(age) {
     discountedPrice = (finalPrice * age) / 100; //calculate discount amount based on age user
     finalPrice -= discountedPrice.toFixed(2); // cut decimal number
-    console.log(`The final cost is: ${finalPrice}€, based on your age discount of ${age}%.\nYour discounted amount is: ${discountedPrice}€.`);
+    console.log(`The final cost is: ${finalPrice}€, since your age is ${userAge} based on your age you ve a discount of ${age}%.\nYour discounted amount is: ${discountedPrice}€.\n
+Your data for this travel is: age:${userAge}, km: ${kmForTrip}, original price was: ${finalPrice+discountedPrice}€, final price is: ${finalPrice}€`);
 }
