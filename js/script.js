@@ -41,13 +41,13 @@ else if (userAge >= 65) {
     CalculateDiscountPrice(discountSenior);
 } else {
     console.log(`The final cost is: ${finalPrice}€, unfortunatelly at your age of ${userAge} you cannot access to a discount price!\n
-Your data for this travel is: age:${userAge}, km: ${kmForTrip}, final price is: ${finalPrice}€`);
+Your data for this travel is: age:${userAge}, km: ${kmForTrip}, final price is: ${finalPrice}€!!`);
 }
 
 //functions
 function CalculateDiscountPrice(discountedRange) {
     discountedPrice = (finalPrice * discountedRange) / 100; //calculate discount amount based on age user
     finalPrice -= discountedPrice.toFixed(2); // cut decimal number
-    console.log(`The final cost is: ${finalPrice}€, since your age is ${userAge} based on your age you ve a discount of ${age}%.\nYour discounted amount is: ${discountedPrice}€.\n
-Your data for this travel is: age:${userAge}, km: ${kmForTrip}, original price was: ${finalPrice+discountedPrice}€, final price is: ${finalPrice}€`);
+    console.log(`The final cost is: ${finalPrice}€, since your age is ${userAge} based on your age you ve a discount of ${discountedRange}%.\nYour discounted amount is: ${discountedPrice}€.\n
+Your data for this travel is: age:${userAge}, km: ${kmForTrip}, original price was: ${finalPrice + discountedPrice}€, final price is: ${finalPrice}€!!`);
 }
