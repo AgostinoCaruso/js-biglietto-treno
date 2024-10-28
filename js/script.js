@@ -18,44 +18,15 @@ const discountSenior = 40; //is a percentage discount for over 65 y
 let finalPrice; //is the final price, using fixed to cut decimal num
 let discountedPrice;
 //user input
-let kmForTrip, userAge; // km for the travel, age of the user input
+// let kmForTrip, userAge; // km for the travel, age of the user input
 let isUserInputWrong = 0;
 console.clear();
 
 //asking user age and km
-do {
-    if (isUserInputWrong == 0) {
-        kmForTrip = parseInt(prompt("Hi, insert your travel km:"));
-    }
-    else {
-        kmForTrip = parseInt(prompt("Invalid characters, please insert numbers:"));
-    }
-    //break from the do while and continue
-    if (!isNaN(kmForTrip)) {
-        isUserInputWrong = 0;
-        break; // Esce dal ciclo se l'input è un numero
-    }
-    isUserInputWrong = 1;
-} while (isNaN(kmForTrip)) // i make sure user can only input num
-console.log(kmForTrip);
-// isUserInputWrong=0;
-do {
-    if (isUserInputWrong == 0) {
-        userAge = parseInt(prompt("Hi, insert your age:"));
-    }
-    else {
-        userAge = parseInt(prompt("Invalid characters, please insert numbers:"));
-    }
-    if (!isNaN(userAge)) {
-        isUserInputWrong = 0;
-        break; // Esce dal ciclo se l'input è un numero
-    }
-    isUserInputWrong = 1;
-} while (isNaN(userAge)) // i make sure user can only input num
+const { kmForTrip, userAge } = AskingUserInput();
 
 //check how much does it cost
 finalPrice = (priceTicketKm * kmForTrip).toFixed(2); //final price before discount
-console.log(finalPrice);
 
 //if statement
 if (userAge < 18) {
@@ -69,10 +40,44 @@ Your data for this travel is: age:${userAge}, km: ${kmForTrip}, final price is: 
 }
 
 //functions
+//Function for asking user input on km and age
+function AskingUserInput() {
+    let kmForTrip, userAge;
+
+    do {
+        if (isUserInputWrong == 0) {
+            kmForTrip = parseInt(prompt("Hi, insert your travel km:"));
+        }
+        else {
+            kmForTrip = parseInt(prompt("Invalid characters, please insert numbers:"));
+        }
+        //break from the do while and continue
+        if (!isNaN(kmForTrip)) {
+            isUserInputWrong = 0;
+            break; // Esce dal ciclo se l'input è un numero
+        }
+        isUserInputWrong = 1;
+    } while (isNaN(kmForTrip)) // i make sure user can only input num
+    do {
+        if (isUserInputWrong == 0) {
+            userAge = parseInt(prompt("Hi, insert your age:"));
+        }
+        else {
+            userAge = parseInt(prompt("Invalid characters, please insert numbers:"));
+        }
+        if (!isNaN(userAge)) {
+            isUserInputWrong = 0;
+            break; // Esce dal ciclo se l'input è un numero
+        }
+        isUserInputWrong = 1;
+    } while (isNaN(userAge)) // i make sure user can only input num
+
+    return { kmForTrip, userAge };
+}
 // here i used const temp.. beacause i needed a variable to work inside the scope
 function CalculateDiscountPrice(discountedRange) {
     discountedPrice = (finalPrice * discountedRange) / 100; //calculate discount amount based on age user
-    finalPrice -= discountedPrice.toFixed(2); // cut decimal number
+    finalPrice -= discountedPrice; // cut decimal number
     const tempDiscountedPrice = discountedPrice.toFixed(2);
     const tempPriceAfterDiscount = finalPrice.toFixed(2);
     const tempPriceBeforeDiscount = (parseFloat(tempPriceAfterDiscount) + parseFloat(tempDiscountedPrice)).toFixed(2);
