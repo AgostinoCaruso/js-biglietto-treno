@@ -37,6 +37,7 @@ do {
     }
     isUserInputWrong = 1;
 } while (isNaN(kmForTrip)) // i make sure user can only input num
+console.log(kmForTrip);
 // isUserInputWrong=0;
 do {
     if (isUserInputWrong == 0) {
@@ -53,7 +54,8 @@ do {
 } while (isNaN(userAge)) // i make sure user can only input num
 
 //check how much does it cost
-finalPrice = parseInt(priceTicketKm * kmForTrip); //final price before discount
+finalPrice = (priceTicketKm * kmForTrip).toFixed(2); //final price before discount
+console.log(finalPrice);
 
 //if statement
 if (userAge < 18) {
@@ -67,9 +69,13 @@ Your data for this travel is: age:${userAge}, km: ${kmForTrip}, final price is: 
 }
 
 //functions
+// here i used const temp.. beacause i needed a variable to work inside the scope
 function CalculateDiscountPrice(discountedRange) {
     discountedPrice = (finalPrice * discountedRange) / 100; //calculate discount amount based on age user
     finalPrice -= discountedPrice.toFixed(2); // cut decimal number
-    console.log(`The final cost is: ${finalPrice}€, since your age is ${userAge} based on your age you ve a discount of ${discountedRange}%.\nYour discounted amount is: ${discountedPrice}€.\n
-Your data for this travel is: age:${userAge}, km: ${kmForTrip}, original price was: ${finalPrice + discountedPrice}€, final price is: ${finalPrice}€!!`);
+    const tempDiscountedPrice = discountedPrice.toFixed(2);
+    const tempPriceAfterDiscount = finalPrice.toFixed(2);
+    const tempPriceBeforeDiscount = (parseFloat(tempPriceAfterDiscount) + parseFloat(tempDiscountedPrice)).toFixed(2);
+    console.log(`The final cost is: ${tempPriceAfterDiscount}€, since your age is ${userAge} based on your age you ve a discount of ${discountedRange}%.\nYour discounted amount is: ${tempDiscountedPrice}€.\n
+Your data for this travel is: age:${userAge}, km: ${kmForTrip}, original price was: ${tempPriceBeforeDiscount}€, final price is: ${tempPriceAfterDiscount}€!!`);
 }
