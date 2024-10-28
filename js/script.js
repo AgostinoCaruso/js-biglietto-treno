@@ -45,8 +45,8 @@ Your data for this travel is: age:${userAge}, km: ${kmForTrip}, final price is: 
 }
 
 //functions
-function CalculateDiscountPrice(age) {
-    discountedPrice = (finalPrice * age) / 100; //calculate discount amount based on age user
+function CalculateDiscountPrice(discountedRange) {
+    discountedPrice = (finalPrice * discountedRange) / 100; //calculate discount amount based on age user
     finalPrice -= discountedPrice.toFixed(2); // cut decimal number
     console.log(`The final cost is: ${finalPrice}€, since your age is ${userAge} based on your age you ve a discount of ${age}%.\nYour discounted amount is: ${discountedPrice}€.\n
 Your data for this travel is: age:${userAge}, km: ${kmForTrip}, original price was: ${finalPrice+discountedPrice}€, final price is: ${finalPrice}€`);
