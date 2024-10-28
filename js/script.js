@@ -8,6 +8,10 @@ Sulla base di queste informazioni dovrà calcolare il prezzo totale del viaggio,
 (con massimo due decimali, per indicare centesimi sul prezzo). Questo richiederà un minimo di ricerca.
 */
 
+
+"use strict"; // to check for typo error
+
+
 // variables
 const priceTicketKm = 0.21; //for each km €
 const discountJunior = 20; //is a percentage discount for below 18 y
@@ -17,38 +21,31 @@ let discountedPrice;
 //user input
 let kmForTrip, userAge; // km for the travel, age of the user input
 console.clear();
+
 //asking user age and km
-do{
-    kmForTrip = parseInt(prompt("Hi, insert your travel km:"));
-}while(isNaN(kmForTrip)) // i make sure user can only input num
-console.log(kmForTrip); // debugging
-
-do{
-    userAge = parseInt(prompt("Hi, insert your current age:"));
-}while(isNaN(userAge)) // i make sure user can only input num
-console.log(userAge); //debugging
-
+AskingUserInput(kmForTrip, userAge);
+console.log(kmForTrip);
 //check how much does it cost
 finalPrice = parseInt(priceTicketKm * kmForTrip); //final price before discount
-console.log(finalPrice);
 
-if(userAge < 18){
+if (userAge < 18) {
     CalculateDiscountPrice(discountJunior);
-    console.log(finalPrice + " final price"); //debugging
 }
-else if(userAge > 65){
+else if (userAge > 65) {
     CalculateDiscountPrice(discountSenior);
-    console.log(finalPrice + " final price"); //debugging
 }
 
-if(userAge < 18 || userAge > 65){
-    console.log(`The final cost is: ${finalPrice}` )
-
+function AskingUserInput(userInput_1,userInput_2 ){
+    do {
+        userInput_1 = parseInt(prompt("Hi, insert your travel km:"));
+    } while (isNaN(userInput_1)) // i make sure user can only input num
+    // do {
+    //     userInput_2 = parseInt(prompt("Hi, insert your current age:"));
+    // } while (isNaN(userInput_2)) // i make sure user can only input num
 }
 
-
-function CalculateDiscountPrice(age){
+function CalculateDiscountPrice(age) {
     discountedPrice = (finalPrice * age) / 100; //calculate discount amount based on age user
-    console.log(discountedPrice + " discounted amount"); //debugging
     finalPrice -= discountedPrice.toFixed(2); // cut decimal number
+    console.log(`The final cost is: ${finalPrice}€, based on your age discount of ${age}%.\nYour discounted amount is: ${discountedPrice}€.`);
 }
